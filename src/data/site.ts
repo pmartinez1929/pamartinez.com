@@ -15,4 +15,21 @@ export const site = {
     titleLine2: 'diseñador UX',
     cta: 'Contáctanos',
   },
+  company: { name: 'Blubear.io', url: 'https://blubear.io/' },
+  intuyo: {
+    label: 'Entusiasta de',
+    text: 'La idea de Intuyo es analizar, idear y mejorar la experiencia de usuarios en entornos digitales. Permitiendo crear sistemas digitales que cumplan con el objetivo del negocio y que estén orientados a usuarios finales.',
+  },
+  about: {
+    label: 'Quien soy',
+    bioBefore:
+      'Soy Pablo Martínez he trabajado aproximadamente 8 años como desarrollador Front-end para diferentes marcas. Actualmente me encuentro trabajando para',
+    text: 'Persona curiosa y autodidacta que busca ayudar a comprender cuales son las necesidades de una idea, y como esta puede hacerse realizad a través de un producto digital.',
+  },
+  socials: [
+    { label: 'LinkedIn', url: 'https://www.linkedin.com/in/pmartinezesp/' },
+    { label: 'GitHub', url: 'https://github.com/pmartinez1929' },
+    { label: 'Behance', url: 'https://www.behance.net/pablomartinez102' },
+    { label: 'Instagram', url: 'https://www.instagram.com/intuyo.dev/' },
+  ],
 };

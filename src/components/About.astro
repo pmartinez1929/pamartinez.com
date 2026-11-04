@@ -1,0 +1,45 @@
+---
+import { Image } from 'astro:assets';
+import profile from '../assets/profile.jpg';
+import { site } from '../data/site';
+---
+
+<div class="relative">
+  <img
+    src="/svg/circles-red.svg"
+    alt=""
+    aria-hidden="true"
+    class="pointer-events-none absolute top-[834px] -right-[60px] hidden w-[252px] md:block"
+  />
+  <section id="sobre-mi" class="relative mx-auto flex max-w-[860px] flex-col px-6 py-[50px] md:px-0">
+    <img
+      src="/svg/circles-red.svg"
+      alt=""
+      aria-hidden="true"
+      class="pointer-events-none absolute -top-[154px] -left-[266px] w-[292px] md:w-[671px]"
+    />
+    <div class="relative">
+      <h2 class="pill bg-aqua">{site.about.label}</h2>
+      <div class="grid gap-4 md:grid-cols-[110px_1fr_170px]">
+        <Image src={profile} alt="Foto de Pablo Martínez" width={110} height={110} class="size-[110px] rounded-full" />
+        <div class="flex flex-col">
+          <p class="mb-4 text-lg font-medium">
+            {site.about.bioBefore}{' '}
+            <a class="underline" href={site.company.url} target="_blank" rel="noopener noreferrer">{site.company.name}</a>
+          </p>
+          <p class="mb-6 max-w-[680px]">{site.about.text}</p>
+        </div>
+        <div class="flex flex-col gap-2">
+          {
+            site.socials.map((s) => (
+              <a data-social class="btn btn-cream" href={s.url} target="_blank" rel="noopener noreferrer">
+                {s.label}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+      <slot />
+    </div>
+  </section>
+</div>

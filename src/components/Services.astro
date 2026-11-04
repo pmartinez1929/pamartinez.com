@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets';
+import { services } from '../data/services';
+---
+
+<section id="servicios" class="my-16 grid gap-16 md:grid-cols-2 md:gap-4">
+  {
+    services.map((s) => (
+      <article class="flex flex-col">
+        <div
+          class:list={[
+            'relative mb-4 rounded-xl bg-blue p-[14px]',
+            s.iconSide === 'left' ? 'pl-[110px] text-right' : 'pr-[110px] text-left',
+          ]}
+        >
+          <div
+            class:list={[
+              'absolute -top-[11px] flex size-[110px] items-center justify-center rounded-full bg-cream',
+              s.iconSide === 'left' ? '-left-[18px]' : '-right-[18px]',
+            ]}
+          >
+            <Image src={s.icon} alt="" />
+          </div>
+          <h3 class="font-display font-bold">
+            <span class="block text-2xl leading-none text-white">{s.title}</span>{' '}
+            <span class="block text-[34px] leading-none text-aqua">{s.accent}</span>
+          </h3>
+        </div>
+        <p class="mb-4 text-lg font-medium">{s.description}</p>
+        <ul>
+          {s.items.map((item) => <li class="mb-1">{item}</li>)}
+        </ul>
+      </article>
+    ))
+  }
+</section>

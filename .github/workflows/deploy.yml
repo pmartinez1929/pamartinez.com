@@ -15,11 +15,6 @@ concurrency:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-    env:
-      FTP_SERVER: ${{ secrets.FTP_SERVER }}
-      FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-      FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-      FTP_DIR: ${{ secrets.FTP_DIR }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -35,8 +30,23 @@ jobs:
       # Compila y valida (astro build + tests sobre dist/)
       - run: npm test
 
+      # Los secrets solo se exponen a este paso y al de deploy (no a npm ci / npm test)
+      - name: Verificar configuración de deploy
+        id: ftp
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_DIR: ${{ secrets.FTP_DIR }}
+        run: |
+          if [ -n "$FTP_SERVER" ] && [ -n "$FTP_USERNAME" ] && [ -n "$FTP_PASSWORD" ] && [ -n "$FTP_DIR" ] && [[ "$FTP_DIR" == */ ]]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Deploy por FTP
-        if: ${{ github.ref == 'refs/heads/main' && env.FTP_SERVER != '' && env.FTP_USERNAME != '' && env.FTP_PASSWORD != '' && env.FTP_DIR != '' }}
+        if: ${{ github.ref == 'refs/heads/main' && steps.ftp.outputs.enabled == 'true' }}
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -48,5 +58,5 @@ jobs:
           local-dir: ./dist/
 
       - name: Deploy omitido
-        if: ${{ !(github.ref == 'refs/heads/main' && env.FTP_SERVER != '' && env.FTP_USERNAME != '' && env.FTP_PASSWORD != '' && env.FTP_DIR != '') }}
-        run: echo "::notice::Se compiló y validó, pero no se desplegó, porque la rama no es main o falta algún secret FTP (FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, FTP_DIR)."
+        if: ${{ !(github.ref == 'refs/heads/main' && steps.ftp.outputs.enabled == 'true') }}
+        run: echo "::notice::Se compiló y validó, pero no se desplegó: la rama no es main, falta algún secret FTP (FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, FTP_DIR) o FTP_DIR sin / al final."

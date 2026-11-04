@@ -17,18 +17,43 @@ test('workflow despliega dist/ por FTP solo si hay secrets', () => {
   for (const s of VARS) assert.match(y, new RegExp(`secrets\.${s}`));
 });
 
-test('deploy solo desde main y con los cuatro secrets; permisos mínimos', () => {
+test('permisos mínimos y checkout sin credenciales', () => {
   const y = wf();
   assert.match(y, /contents: read/);
   assert.match(y, /persist-credentials: false/);
+  assert.match(y, /node-version: 24/);
+  assert.match(y, /concurrency:/);
+});
+
+test('los secrets no son visibles antes del gate (npm ci / npm test)', () => {
+  const y = wf();
+  const gate = y.indexOf('id: ftp');
+  assert.ok(gate > 0, 'existe el paso gate con id ftp');
+  assert.ok(y.indexOf('npm test') < gate, 'el gate va después de npm test');
+  assert.ok(!y.slice(0, gate).includes('secrets.'), 'ningún secret antes del gate');
+  assert.ok(!/^ {4}env:/m.test(y), 'sin env a nivel de job');
+});
+
+test('gate valida los cuatro secrets y la barra final de FTP_DIR', () => {
+  const y = wf();
+  const gate = y.slice(y.indexOf('id: ftp'), y.indexOf('- name: Deploy por FTP'));
+  for (const s of VARS) assert.ok(gate.includes(s + ": $" + "{{ secrets." + s + " }}"), `env ${s} desde secrets`);
+  assert.match(gate, /enabled=true/);
+  assert.match(gate, /enabled=false/);
+  assert.match(gate, /GITHUB_OUTPUT/);
+  assert.match(gate, /\*\//, 'comprueba que FTP_DIR termina en /');
+});
+
+test('deploy y aviso de omitido dependen del gate', () => {
+  const y = wf();
   const deploy = y.match(/- name: Deploy por FTP\n\s+if: (.*)\n/);
   assert.ok(deploy, 'el paso de deploy tiene if');
   assert.match(deploy[1], /refs\/heads\/main/);
-  for (const s of VARS) assert.match(deploy[1], new RegExp(`env\.${s} != ''`));
+  assert.match(deploy[1], /steps\.ftp\.outputs\.enabled == 'true'/);
   const skip = y.match(/- name: Deploy omitido\n\s+if: (.*)\n/);
   assert.ok(skip, 'el aviso de omitido tiene if');
-  assert.match(skip[1], /!\(/);
-  for (const s of VARS) assert.ok(y.includes(s + ": $" + "{{ secrets." + s + " }}"), `env ${s} desde secrets`);
+  assert.equal(skip[1], '${{ !(github.ref == \'refs/heads/main\' && steps.ftp.outputs.enabled == \'true\') }}');
+  assert.match(y, /FTP_DIR sin/);
 });
 
 test('README documenta deploy manual y automático', () => {
@@ -36,4 +61,5 @@ test('README documenta deploy manual y automático', () => {
   assert.match(r, /npm run build/);
   assert.match(r, /FTP_SERVER/);
   assert.match(r, /src\/data/);
+  assert.match(r, /termina en `\/`/);
 });

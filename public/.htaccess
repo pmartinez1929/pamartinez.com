@@ -1,0 +1,44 @@
+# pamartinez.com — Astro estático en hosting compartido (Apache)
+
+Options -Indexes
+DirectoryIndex index.html
+
+# HTTPS obligatorio
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+ErrorDocument 404 /404.html
+
+# Compresión
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json application/xml image/svg+xml application/manifest+json
+</IfModule>
+
+AddType application/manifest+json .webmanifest
+AddType image/avif .avif
+AddType image/webp .webp
+
+# Cache
+<IfModule mod_headers.c>
+  # Assets con hash generados por Astro
+  <If "%{REQUEST_URI} =~ m#^/_astro/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+  <FilesMatch "\.(html|xml|txt|webmanifest)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\.(png|jpg|jpeg|svg|ico)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# No exponer el estado de FTP-Deploy-Action
+<Files ".ftp-deploy-sync-state.json">
+  Require all denied
+</Files>

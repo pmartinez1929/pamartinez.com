@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Página no encontrada | Pablo A Martínez" noindex>
+  <Header />
+  <main class="mx-auto flex min-h-[60vh] max-w-[664px] flex-col items-center justify-center px-6 text-center">
+    <h1 class="font-display text-5xl font-bold text-navy">404</h1>
+    <p class="my-6">La página que buscas no existe.</p>
+    <a class="btn btn-red" href="/">Volver al inicio</a>
+  </main>
+  <Footer />
+</BaseLayout>

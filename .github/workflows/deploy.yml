@@ -3,14 +3,18 @@ name: Build y deploy
 on:
   push:
     branches: [main]
+  # Cada PR hacia main compila y ejecuta los tests (check requerido para el merge); nunca despliega
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
 
+# Los deploys de main van en serie; cada PR tiene su propio grupo y un push nuevo cancela el run anterior
 concurrency:
-  group: deploy-production
-  cancel-in-progress: false
+  group: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.ref) || 'deploy-production' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   build-deploy:
@@ -30,9 +34,10 @@ jobs:
       # Compila y valida (astro build + tests sobre dist/)
       - run: npm test
 
-      # Los secrets solo se exponen a este paso y al de deploy (no a npm ci / npm test)
+      # Los secrets solo se exponen a este paso y al de deploy (no a npm ci / npm test), y solo en main
       - name: Verificar configuración de deploy
         id: ftp
+        if: ${{ github.ref == 'refs/heads/main' }}
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}

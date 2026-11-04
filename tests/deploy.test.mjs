@@ -75,3 +75,15 @@ test('README documenta deploy manual y automático', () => {
   assert.match(r, /curl -I/);
   assert.match(r, /termina en `\/`/);
 });
+
+test('los PR hacia main compilan y testean, sin secrets ni deploy', () => {
+  const w = parse(wf());
+  assert.deepEqual(w.on.pull_request?.branches, ['main']);
+  const steps = w.jobs['build-deploy'].steps;
+  const gate = steps.find((s) => s.id === 'ftp');
+  assert.match(gate.if ?? '', /github\.ref == 'refs\/heads\/main'/, 'el gate (único paso con secrets) no corre en PRs');
+  const deploy = steps.find((s) => s.name === 'Deploy por FTP');
+  assert.match(deploy.if, /github\.ref == 'refs\/heads\/main'/);
+  // Un PR no debe quedar en cola detrás de un deploy de producción
+  assert.match(w.concurrency.group, /pull_request/);
+});

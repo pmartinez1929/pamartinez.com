@@ -28,6 +28,34 @@ Todo el contenido está en `src/data/`:
 
 Las imágenes van en `src/assets/` (Astro las optimiza) y los SVG decorativos en `public/svg/`.
 
+## Flujo de trabajo (ramas y PR)
+
+`main` está protegida: todo lo que entra se publica en pamartinez.com, y solo se actualiza mediante Pull Request con el check `build-deploy` en verde. No se hace push directo a `main`.
+
+Prefijos de rama:
+
+| Prefijo | Uso | Ejemplo |
+| --- | --- | --- |
+| `feat/` | Funcionalidad o sección nueva | `feat/blog` |
+| `fix/` | Corrección | `fix/footer-espacio` |
+| `content/` | Textos, proyectos, imágenes | `content/actualizar-proyectos` |
+| `ci/` / `chore/` | Configuración, dependencias, workflow | `ci/flujo-ramas` |
+
+```bash
+git switch main && git pull                  # partir de main actualizado
+git switch -c content/actualizar-proyectos   # rama nueva
+# ...cambios...
+npm test                                     # validar en local
+git add -A && git commit -m "content: actualizar proyectos"
+git push -u origin content/actualizar-proyectos
+```
+
+Luego abre el PR hacia `main` en GitHub. El workflow compila y ejecuta los tests en el PR, **sin desplegar**. Con el check en verde, haz **Squash and merge**: el push resultante a `main` despliega solo. Después:
+
+```bash
+git switch main && git pull && git branch -d content/actualizar-proyectos
+```
+
 ## Deploy
 
 ### Manual
@@ -53,7 +81,7 @@ curl -I https://pamartinez.com/no-existe              # 404
 
 ### Automático (GitHub Actions)
 
-`.github/workflows/deploy.yml` compila, ejecuta los tests y sube `dist/` por FTP en cada push a `main`, o manualmente desde la pestaña Actions.
+`.github/workflows/deploy.yml` compila, ejecuta los tests y sube `dist/` por FTP en cada push a `main` (es decir, al hacer merge de un PR), o manualmente desde la pestaña Actions. En los PR solo compila y testea: los secrets no se exponen y no se despliega.
 
 Configura en **Settings → Secrets and variables → Actions**:
 

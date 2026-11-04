@@ -11,6 +11,10 @@ const expected = [
   ['Valiente', 'https://valiente.pamartinez.com/', 'Visitar', 'CodeIgniter'],
 ];
 
+test('sección proyectos con h2 accesible', () => {
+  assert.equal(t(page().querySelector('#proyectos h2')), 'Proyectos');
+});
+
 test('6 proyectos en orden, con captura, tecnología y CTA', () => {
   const cards = page().querySelectorAll('#proyectos article');
   assert.equal(cards.length, 6);

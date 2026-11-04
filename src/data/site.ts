@@ -26,6 +26,7 @@ export const site = {
       'Soy Pablo Martínez he trabajado aproximadamente 8 años como desarrollador Front-end para diferentes marcas. Actualmente me encuentro trabajando para',
     text: 'Persona curiosa y autodidacta que busca ayudar a comprender cuales son las necesidades de una idea, y como esta puede hacerse realizad a través de un producto digital.',
   },
+  projectsLabel: 'Proyectos',
   clientsLabel: 'He trabajado',
   socials: [
     { label: 'LinkedIn', url: 'https://www.linkedin.com/in/pmartinezesp/' },

@@ -6,6 +6,7 @@ test('sección Intuyo con pill, logo y texto', () => {
   const s = page().querySelector('#intuyo');
   assert.ok(s);
   assert.match(t(s), /^Entusiasta de/);
+  assert.equal(t(s.querySelector('h2')), 'Entusiasta de');
   assert.ok(s.querySelector('img[alt="Intuyo"]'));
   assert.match(t(s), /La idea de Intuyo es analizar, idear y mejorar la experiencia de usuarios en entornos digitales\./);
 });

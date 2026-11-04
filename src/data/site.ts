@@ -33,4 +33,12 @@ export const site = {
     { label: 'Behance', url: 'https://www.behance.net/pablomartinez102' },
     { label: 'Instagram', url: 'https://www.instagram.com/intuyo.dev/' },
   ],
+  cta: {
+    title: '¿Tienes una idea?',
+    accent: 'conecta',
+    text: 'Conversemos como una idea se puede convertir en una solución digital y como poder llegar a lograrlo.',
+    whatsapp: 'Contactame al Whatsapp',
+    calendly: 'Agenda una reunión (gratuita)',
+    email: 'Escribe un correo electrónico',
+  },
 };

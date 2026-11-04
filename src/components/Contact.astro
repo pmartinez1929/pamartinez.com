@@ -1,0 +1,45 @@
+---
+import { site } from '../data/site';
+
+const items = [
+  { label: site.cta.whatsapp, href: site.contact.whatsapp, icon: '/svg/icon-whatsapp.svg', h: 19, external: true },
+  { label: site.cta.calendly, href: site.contact.calendly, icon: '/svg/icon-calendar.svg', h: 19, external: true },
+  { label: site.cta.email, href: `mailto:${site.contact.email}`, icon: '/svg/icon-email.svg', h: 15, external: false },
+];
+---
+
+<div class="relative">
+  <img
+    src="/svg/circles.svg"
+    alt=""
+    aria-hidden="true"
+    class="pointer-events-none absolute -top-[201px] -left-[90px] w-[169px] md:w-[454px]"
+  />
+  <img
+    src="/svg/circles.svg"
+    alt=""
+    aria-hidden="true"
+    class="pointer-events-none absolute top-[595px] -right-[60px] hidden w-[252px] md:block"
+  />
+  <section id="contacto" class="relative mx-auto flex max-w-[420px] flex-col px-6 py-20 text-center md:px-0 md:py-[140px]">
+    <h2 class="font-display text-2xl font-bold text-navy md:text-5xl">{site.cta.title}</h2>
+    <p class="mb-4 font-display text-[40px] leading-none font-bold text-muted md:text-[64px]" aria-hidden="true">
+      {site.cta.accent}
+    </p>
+    <p class="mb-6">{site.cta.text}</p>
+    {
+      items.map((item) => (
+        <a
+          class="group mb-5 flex font-medium"
+          href={item.href}
+          {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        >
+          <span class="mr-4 flex size-11 shrink-0 items-center justify-center rounded-2xl bg-navy">
+            <img src={item.icon} alt="" width="19" height={item.h} />
+          </span>
+          <span class="btn btn-cream flex-1 group-hover:bg-aqua">{item.label}</span>
+        </a>
+      ))
+    }
+  </section>
+</div>

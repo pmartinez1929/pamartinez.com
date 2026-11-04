@@ -27,7 +27,7 @@ test('deploy solo desde main y con los cuatro secrets; permisos mínimos', () =>
   const skip = y.match(/- name: Deploy omitido\n\s+if: (.*)\n/);
   assert.ok(skip, 'el aviso de omitido tiene if');
   assert.match(skip[1], /!\(/);
-  for (const s of VARS) assert.match(y, new RegExp(`${s}: \$\{\{ secrets\.${s} \}\}`));
+  for (const s of VARS) assert.ok(y.includes(s + ": $" + "{{ secrets." + s + " }}"), `env ${s} desde secrets`);
 });
 
 test('README documenta deploy manual y automático', () => {

@@ -1,0 +1,65 @@
+@import "tailwindcss";
+@import "@fontsource/vidaloka/400.css";
+@import "@fontsource/quicksand/400.css";
+@import "@fontsource/quicksand/500.css";
+
+@theme {
+  --color-navy: #1d3557;
+  --color-blue: #457b9d;
+  --color-aqua: #a8dadc;
+  --color-cream: #f1faee;
+  --color-red: #e63946;
+  --color-ink: #1e1e1e;
+  --color-muted: #b1b1b1;
+
+  --font-display: "Vidaloka", Georgia, serif;
+  --font-sans: "Quicksand", system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    background-color: #fff;
+    overflow-x: clip;
+  }
+  a:focus-visible {
+    outline: 2px solid var(--color-navy);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .pill {
+    display: inline-block;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    padding: 4px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+  }
+  .btn {
+    display: inline-block;
+    border-radius: 20px;
+    padding: 8px 31px;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .btn-red {
+    background-color: var(--color-red);
+    color: #fff;
+  }
+  .btn-red:hover {
+    background-color: var(--color-navy);
+  }
+  .btn-cream {
+    background-color: var(--color-cream);
+    color: var(--color-navy);
+  }
+  .btn-cream:hover {
+    background-color: var(--color-aqua);
+  }
+}

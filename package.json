@@ -1,0 +1,29 @@
+{
+  "name": "pamartinez.com",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "astro build && node --test \"tests/**/*.test.mjs\""
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource/quicksand": "^5.3.0",
+    "@fontsource/vidaloka": "^5.3.0",
+    "@tailwindcss/vite": "^4.3.4",
+    "astro": "^7.4.5",
+    "tailwindcss": "^4.3.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "node-html-parser": "^9.0.6",
+    "typescript": "^6.0.3"
+  }
+}

@@ -27,3 +27,6 @@ _assets-old/
 
 # superpowers scratch
 .superpowers/
+
+# configuración local de Claude Code
+.claude/

@@ -59,4 +59,5 @@ jobs:
 
       - name: Deploy omitido
         if: ${{ !(github.ref == 'refs/heads/main' && steps.ftp.outputs.enabled == 'true') }}
-        run: echo "::notice::Se compiló y validó, pero no se desplegó: la rama no es main, falta algún secret FTP (FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, FTP_DIR) o FTP_DIR sin / al final."
+        run: |
+          echo "::notice::Se compiló y validó, pero no se desplegó: la rama no es main, falta algún secret FTP (FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, FTP_DIR) o FTP_DIR sin / al final."

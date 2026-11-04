@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { parse } from 'yaml';
 
 const read = (p) => readFileSync(new URL(p, import.meta.url), 'utf8').replace(/\r\n/g, '\n');
 const wf = () => read('../.github/workflows/deploy.yml');
@@ -14,7 +15,7 @@ test('workflow despliega dist/ por FTP solo si hay secrets', () => {
   assert.match(y, /npm test/);
   assert.match(y, /SamKirkland\/FTP-Deploy-Action@v4\.3\.5/);
   assert.match(y, /local-dir: \.\/dist\//);
-  for (const s of VARS) assert.match(y, new RegExp(`secrets\.${s}`));
+  for (const s of VARS) assert.match(y, new RegExp(`secrets\\.${s}`));
 });
 
 test('permisos mínimos y checkout sin credenciales', () => {
@@ -54,6 +55,15 @@ test('deploy y aviso de omitido dependen del gate', () => {
   assert.ok(skip, 'el aviso de omitido tiene if');
   assert.equal(skip[1], '${{ !(github.ref == \'refs/heads/main\' && steps.ftp.outputs.enabled == \'true\') }}');
   assert.match(y, /FTP_DIR sin/);
+});
+
+test('el workflow es YAML válido con los pasos de deploy esperados', () => {
+  const doc = parse(wf());
+  const steps = doc.jobs['build-deploy'].steps;
+  const byName = (n) => steps.find((s) => s.name === n);
+  assert.equal(byName('Deploy por FTP').if, "${{ github.ref == 'refs/heads/main' && steps.ftp.outputs.enabled == 'true' }}");
+  assert.equal(byName('Deploy omitido').if, "${{ !(github.ref == 'refs/heads/main' && steps.ftp.outputs.enabled == 'true') }}");
+  assert.match(byName('Deploy omitido').run, /no se desplegó/);
 });
 
 test('README documenta deploy manual y automático', () => {

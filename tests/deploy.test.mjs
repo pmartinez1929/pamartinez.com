@@ -2,7 +2,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
-const wf = () => readFileSync(new URL('../.github/workflows/deploy.yml', import.meta.url), 'utf8');
+const read = (p) => readFileSync(new URL(p, import.meta.url), 'utf8').replace(/\r\n/g, '\n');
+const wf = () => read('../.github/workflows/deploy.yml');
 const VARS = ['FTP_SERVER', 'FTP_USERNAME', 'FTP_PASSWORD', 'FTP_DIR'];
 
 test('workflow despliega dist/ por FTP solo si hay secrets', () => {
@@ -31,7 +32,7 @@ test('deploy solo desde main y con los cuatro secrets; permisos mínimos', () =>
 });
 
 test('README documenta deploy manual y automático', () => {
-  const r = readFileSync(new URL('../README.md', import.meta.url), 'utf8');
+  const r = read('../README.md');
   assert.match(r, /npm run build/);
   assert.match(r, /FTP_SERVER/);
   assert.match(r, /src\/data/);

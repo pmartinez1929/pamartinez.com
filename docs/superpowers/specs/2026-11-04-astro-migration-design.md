@@ -83,7 +83,7 @@ README.md
 - **Build:** `npm run build` genera `dist/`, que va a la raíz pública (`public_html`).
 - **`.htaccess`:** forzar HTTPS, `ErrorDocument 404 /404.html`, gzip/deflate para text/css/js/svg/json, `Cache-Control: public, max-age=31536000, immutable` para `/_astro/`, cache corto para HTML.
 - **Manual:** documentado en el README.
-- **Automático:** `.github/workflows/deploy.yml` que se ejecuta en push a `main` y con `workflow_dispatch`. Hace checkout, Node 22, `npm ci`, `npm run build` y luego `SamKirkland/FTP-Deploy-Action` con `local-dir: ./dist/`. Usa los secrets `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD` y `FTP_DIR`, y opcionalmente las variables `FTP_PROTOCOL`/`FTP_PORT`. Si falta `FTP_SERVER`, el paso de deploy se omite (`if`) y el build igual valida.
+- **Automático:** `.github/workflows/deploy.yml` que se ejecuta en push a `main` y con `workflow_dispatch`. Hace checkout, Node 24 (engines: >=22.23.4, requerido por Astro 7), `npm ci`, `npm test` (build + tests) y luego `SamKirkland/FTP-Deploy-Action` con `local-dir: ./dist/`. Usa los secrets `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD` y `FTP_DIR`, y opcionalmente las variables `FTP_PROTOCOL`/`FTP_PORT`. El deploy solo corre desde `main`, con los cuatro secrets presentes y `FTP_DIR` terminando en `/`; si no, se omite (`if`) y el build igual valida. Los secrets solo se exponen al paso gate y al de deploy, no a `npm ci`/`npm test`.
 - **Riesgo:** el deploy por FTP sobrescribe archivos del hosting. La primera vez conviene un respaldo manual del `public_html` actual.
 
 ## 8. Assets

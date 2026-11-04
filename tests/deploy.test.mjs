@@ -61,5 +61,7 @@ test('README documenta deploy manual y automático', () => {
   assert.match(r, /npm run build/);
   assert.match(r, /FTP_SERVER/);
   assert.match(r, /src\/data/);
+  assert.match(r, /page-data/);
+  assert.match(r, /curl -I/);
   assert.match(r, /termina en `\/`/);
 });

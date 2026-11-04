@@ -38,6 +38,19 @@ npm run build
 
 Sube **el contenido** de `dist/` (incluido `.htaccess`, que es un archivo oculto) a `public_html` por FTP o el administrador de archivos de cPanel. Antes del primer deploy, respalda el `public_html` actual.
 
+#### Antes del primer deploy
+
+1. Respalda `public_html` completo y guarda una copia del `.htaccess` actual para compararlo. El hosting (Bluehost/Newfold) puede tener reglas propias, y el nuevo `.htaccess` usa `Options` y `Require`, que necesitan `AllowOverride`. Si el sitio devuelve 500 tras el deploy, restaura el `.htaccess` anterior y combínalos.
+2. Con el respaldo hecho, borra de `public_html` los restos del sitio Gatsby: `404/`, `page-data/`, `static/`, `dev-404-page/`, los `*.js` y `*.js.map` de la raíz (`app-*.js`, etc.), `webpack.stats.json`, `chunk-map.json`. **No toques** carpetas de subdominios como `valiente/` ni otras carpetas o archivos que no sean de Gatsby.
+
+#### Después del primer deploy (smoke test)
+
+```bash
+curl -I https://pamartinez.com/                       # 200
+curl -I https://pamartinez.com/_astro/<archivo>.css   # Cache-Control con immutable
+curl -I https://pamartinez.com/no-existe              # 404
+```
+
 ### Automático (GitHub Actions)
 
 `.github/workflows/deploy.yml` compila, ejecuta los tests y sube `dist/` por FTP en cada push a `main`, o manualmente desde la pestaña Actions.

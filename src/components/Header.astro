@@ -1,0 +1,11 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/brand/logo-pmartinez.png';
+import { site } from '../data/site';
+---
+
+<header class="mt-6 flex h-20 items-center justify-center bg-cream px-4 md:px-[38px]">
+  <a href="/" aria-label="Inicio">
+    <Image src={logo} alt={site.name} height={60} class="h-[60px] w-auto" loading="eager" />
+  </a>
+</header>

@@ -1,0 +1,22 @@
+---
+import { site } from '../data/site';
+---
+
+<section id="inicio" class="mx-auto my-[60px] flex max-w-[664px] flex-col items-center px-6 md:my-[100px] md:px-0">
+  <h1 class="w-full font-display text-2xl leading-tight font-bold text-navy md:text-[64px] md:leading-none">
+    <span class="block">{site.hero.titleLine1}</span>{' '}
+    <span class="mt-2 flex items-center justify-end gap-3 text-muted">
+      <span
+        class="flex h-[30px] w-[28px] items-center justify-center bg-red font-sans text-2xl font-normal text-white md:h-[55px] md:w-[50px] md:text-[45px]"
+        >&amp;</span
+      >{' '}
+      {site.hero.titleLine2}
+    </span>
+  </h1>
+  <div class="flex w-full flex-col items-start md:w-[442px]">
+    <p class="my-[35px] max-w-[680px]">{site.description}</p>
+    <a class="btn btn-red" href={site.contact.whatsapp} target="_blank" rel="noopener noreferrer">
+      {site.hero.cta}
+    </a>
+  </div>
+</section>

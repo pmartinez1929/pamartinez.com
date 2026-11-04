@@ -22,5 +22,6 @@ export function t(el) {
 
 /** Asserta que un <a> externo abre en pestaña nueva de forma segura. */
 export function isSafeExternal(a) {
-  return a.getAttribute('target') === '_blank' && /noopener/.test(a.getAttribute('rel') ?? '');
+  const rel = (a.getAttribute('rel') ?? '').split(/\s+/);
+  return a.getAttribute('target') === '_blank' && rel.includes('noopener') && rel.includes('noreferrer');
 }

@@ -34,3 +34,12 @@ test('404 tiene link de vuelta al inicio', () => {
   assert.ok(doc.querySelector('a[href="/"]'));
   assert.ok(doc.querySelector('meta[name="robots"][content="noindex"]'));
 });
+
+test('404 sin canonical ni og:url; home con canonical y sin robots', () => {
+  const nf = page('404.html');
+  assert.equal(nf.querySelector('link[rel="canonical"]'), null);
+  assert.equal(nf.querySelector('meta[property="og:url"]'), null);
+  const home = page();
+  assert.ok(home.querySelector('link[rel="canonical"]'));
+  assert.equal(home.querySelector('meta[name="robots"]'), null);
+});

@@ -5,6 +5,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 concurrency:
   group: deploy-production
   cancel-in-progress: false
@@ -14,8 +17,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FTP_SERVER: ${{ secrets.FTP_SERVER }}
+      FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+      FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+      FTP_DIR: ${{ secrets.FTP_DIR }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - uses: actions/setup-node@v4
         with:
@@ -28,7 +36,7 @@ jobs:
       - run: npm test
 
       - name: Deploy por FTP
-        if: ${{ env.FTP_SERVER != '' }}
+        if: ${{ github.ref == 'refs/heads/main' && env.FTP_SERVER != '' && env.FTP_USERNAME != '' && env.FTP_PASSWORD != '' && env.FTP_DIR != '' }}
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -40,5 +48,5 @@ jobs:
           local-dir: ./dist/
 
       - name: Deploy omitido
-        if: ${{ env.FTP_SERVER == '' }}
-        run: echo "::notice::FTP_SERVER no está configurado; se compiló y validó, pero no se desplegó."
+        if: ${{ !(github.ref == 'refs/heads/main' && env.FTP_SERVER != '' && env.FTP_USERNAME != '' && env.FTP_PASSWORD != '' && env.FTP_DIR != '') }}
+        run: echo "::notice::Se compiló y validó, pero no se desplegó, porque la rama no es main o falta algún secret FTP (FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, FTP_DIR)."

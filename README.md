@@ -53,4 +53,4 @@ Configura en **Settings → Secrets and variables → Actions**:
 | Variable (opcional) | `FTP_PROTOCOL` | `ftps` (por defecto), `ftp` o `ftps-legacy` |
 | Variable (opcional) | `FTP_PORT` | `21` |
 
-Si `FTP_SERVER` no existe, el workflow compila y valida pero no despliega.
+El deploy solo se ejecuta desde `main` y solo si existen los cuatro secrets (`FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`, `FTP_DIR`); en cualquier otro caso el workflow compila y valida pero no despliega.

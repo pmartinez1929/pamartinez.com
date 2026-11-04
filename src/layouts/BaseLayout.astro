@@ -40,6 +40,9 @@ const ogImage = new URL('/icons/icon-512x512.png', Astro.site).href;
     <meta name="twitter:description" content={description} />
   </head>
   <body>
-    <slot />
+    <!-- Recorta los círculos decorativos que sobresalen por los bordes de la página (incluido debajo del footer) -->
+    <div class="overflow-clip">
+      <slot />
+    </div>
   </body>
 </html>

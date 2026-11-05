@@ -2,9 +2,10 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { page } from './helpers.mjs';
 
-// Los 14 destinos únicos del sitio Gatsby original (relevados el 2026-11-04)
+// Los 14 destinos únicos del sitio Gatsby original (relevados el 2026-11-04).
+// Actualizados en content/copy: WhatsApp con mensaje prellenado y correo del dominio.
 const original = [
-  'https://api.whatsapp.com/send?phone=593995027973',
+  'https://api.whatsapp.com/send?phone=593995027973&text=Hola%20Pablo%2C%20vi%20tu%20web%20y%20quiero%20conversar%20sobre%20un%20proyecto.',
   'https://blubear.io/',
   'https://www.linkedin.com/in/pmartinezesp/',
   'https://github.com/pmartinez1929',
@@ -17,7 +18,7 @@ const original = [
   'https://www.maxusecuador.com/',
   'https://valiente.pamartinez.com/',
   'https://calendly.com/pmartinez1929/reunion',
-  'mailto:pmartinezesp@outlook.com',
+  'mailto:hola@pamartinez.com',
 ];
 
 test('el sitio conserva todos los links del original', () => {

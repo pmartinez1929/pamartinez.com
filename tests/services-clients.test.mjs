@@ -6,12 +6,12 @@ test('dos servicios con título, descripción e items', () => {
   const cards = page().querySelectorAll('#servicios article');
   assert.equal(cards.length, 2);
   assert.equal(t(cards[0].querySelector('h3')), 'Desarrollo digital');
-  assert.match(t(cards[0]), /He trabajado con varios frameworks Javascript\. \(React, VueJS, Angular\)/);
+  assert.match(t(cards[0]), /Construyo webs y aplicaciones rápidas y fáciles de mantener con React, Vue y Angular\./);
   assert.deepEqual(cards[0].querySelectorAll('li').map(t), ['Desarrollo web', 'Desarrollo de aplicaciones móviles']);
   assert.equal(t(cards[1].querySelector('h3')), 'Diseño UX');
-  assert.match(t(cards[1]), /Utilizo Figma para prototipar y testear\./);
+  assert.match(t(cards[1]), /Uso Figma para prototipar y validar con usuarios antes de desarrollar\./);
   assert.deepEqual(cards[1].querySelectorAll('li').map(t), [
-    'Prototipado y arquitectura',
+    'Prototipado y arquitectura de información',
     'Diseño UI y diseño de interacción',
     'Investigación y testeo',
   ]);

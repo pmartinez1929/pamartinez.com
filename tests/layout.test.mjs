@@ -6,7 +6,7 @@ test('index tiene lang es, viewport y título del sitio', () => {
   const doc = page();
   assert.equal(doc.querySelector('html').getAttribute('lang'), 'es');
   assert.ok(doc.querySelector('meta[name="viewport"]'));
-  assert.equal(doc.querySelector('title').text, 'Pablo A Martínez | Frontend Developer y UX Designer');
+  assert.equal(doc.querySelector('title').text, 'Pablo A Martínez | Diseñador de producto y desarrollador');
 });
 
 test('index carga la hoja de estilos compilada', () => {

@@ -14,19 +14,20 @@ export interface Service {
 
 export const services: Service[] = [
   {
-    title: 'Desarrollo',
-    accent: 'digital',
-    description: 'Construyo webs y aplicaciones rápidas y fáciles de mantener con React, Vue y Angular.',
-    items: ['Desarrollo web', 'Desarrollo de aplicaciones móviles'],
-    icon: iconWeb,
+    title: 'Diseño',
+    accent: 'UX',
+    description: 'Ordeno tu idea en pantallas claras y la pruebo con personas reales antes de escribir código.',
+    items: ['Investigación con usuarios', 'Prototipos navegables en Figma', 'Diseño de interfaces (UI)'],
+    icon: iconUx,
     iconSide: 'left',
   },
   {
-    title: 'Diseño',
-    accent: 'UX',
-    description: 'Uso Figma para prototipar y validar con usuarios antes de desarrollar.',
-    items: ['Prototipado y arquitectura de información', 'Diseño UI y diseño de interacción', 'Investigación y testeo'],
-    icon: iconUx,
+    title: 'Desarrollo',
+    accent: 'digital',
+    description:
+      'Convierto el diseño en una web o app rápida, que funciona en cualquier dispositivo y es fácil de mantener.',
+    items: ['Sitios y aplicaciones web', 'Apps móviles', 'Desarrollo acelerado con IA'],
+    icon: iconWeb,
     iconSide: 'right',
   },
 ];

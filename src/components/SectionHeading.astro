@@ -1,0 +1,19 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  /** `dark` para fondos navy */
+  tone?: 'light' | 'dark';
+  class?: string;
+}
+
+const { eyebrow, title, tone = 'light', class: className } = Astro.props;
+const dark = tone === 'dark';
+---
+
+<div data-section-heading class={className}>
+  <p class:list={['text-xs font-bold tracking-[0.14em] uppercase', dark ? 'text-aqua' : 'text-red']}>{eyebrow}</p>
+  <h2 class:list={['mt-1.5 font-display text-3xl leading-tight md:text-[44px]', dark ? 'text-white' : 'text-navy']}>
+    {title}
+  </h2>
+</div>

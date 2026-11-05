@@ -2,12 +2,11 @@
 import { Image } from 'astro:assets';
 import { services } from '../data/services';
 import { site } from '../data/site';
+import SectionHeading from './SectionHeading.astro';
 ---
 
 <section id="servicios" class="mx-auto my-16 max-w-[860px] px-6 lg:px-0">
-  <div class="flex justify-center">
-    <h2 class="pill bg-aqua">{site.servicesLabel}</h2>
-  </div>
+  <SectionHeading {...site.sections.services} />
   <div class="mt-12 grid gap-16 md:grid-cols-2 md:gap-4">
     {
       services.map((s) => (

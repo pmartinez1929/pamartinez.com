@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { page, t, isSafeExternal } from './helpers.mjs';
+import { page, t, isSafeExternal, sectionHeading } from './helpers.mjs';
 
 test('sección Intuyo con pill, logo, texto, estado y CTA a Instagram', () => {
   const s = page().querySelector('#intuyo');
@@ -18,8 +18,7 @@ test('sección Intuyo con pill, logo, texto, estado y CTA a Instagram', () => {
 test('quien soy: foto, bio con Blubear y texto', () => {
   const s = page().querySelector('#sobre-mi');
   assert.ok(s);
-  assert.ok(s.querySelector('h2'));
-  assert.equal(t(s.querySelector('h2')), 'Quién soy');
+  assert.deepEqual(sectionHeading(s), { eyebrow: 'Sobre mí', title: 'Quién soy' });
   assert.ok(s.querySelector('img[alt="Foto de Pablo Martínez"]'));
   assert.match(t(s), new RegExp(`Soy Pablo Martínez, desarrollador Front-end con más de ${new Date().getFullYear() - 2015} años de experiencia creando productos digitales para distintas marcas\\. Actualmente trabajo en Blubear\\.io`));
   const blubear = s.querySelector('a[href="https://blubear.io/"]');

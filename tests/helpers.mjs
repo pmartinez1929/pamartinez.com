@@ -25,3 +25,9 @@ export function isSafeExternal(a) {
   const rel = (a.getAttribute('rel') ?? '').split(/\s+/);
   return a.getAttribute('target') === '_blank' && rel.includes('noopener') && rel.includes('noreferrer');
 }
+
+/** Etiqueta y título del SectionHeading de una sección. */
+export function sectionHeading(section) {
+  const wrap = section.querySelector('[data-section-heading]');
+  return { eyebrow: t(wrap.querySelector('p')), title: t(wrap.querySelector('h2')) };
+}

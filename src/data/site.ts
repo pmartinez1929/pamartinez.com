@@ -38,14 +38,20 @@ export const site = {
     ctaLabel: 'Sigue el proyecto en Instagram',
   },
   about: {
-    label: 'Quién soy',
     bioBefore: `Soy Pablo Martínez, desarrollador Front-end con más de ${years} años de experiencia creando productos digitales para distintas marcas. Actualmente trabajo en`,
     text: 'Soy curioso y autodidacta. Me gusta entender qué necesita realmente una idea y cómo convertirla en un producto digital que la gente use.',
   },
   projectsLabel: 'Proyectos',
   processLabel: 'Cómo trabajo',
-  clientsLabel: 'He trabajado con',
-  servicesLabel: 'Qué hago',
+  // Títulos de sección: etiqueta (eyebrow) + h2
+  sections: {
+    clients: { eyebrow: 'Clientes', title: 'He trabajado con' },
+    services: { eyebrow: 'Servicios', title: 'Qué hago' },
+    process: { eyebrow: 'Proceso', title: 'Cómo trabajo' },
+    projects: { eyebrow: 'Portafolio', title: 'Proyectos' },
+    intuyo: { eyebrow: 'Estoy creando', title: 'Intuyo' },
+    about: { eyebrow: 'Sobre mí', title: 'Quién soy' },
+  },
   socials: [
     { label: 'LinkedIn', url: 'https://www.linkedin.com/in/pmartinezesp/' },
     { label: 'GitHub', url: 'https://github.com/pmartinez1929' },

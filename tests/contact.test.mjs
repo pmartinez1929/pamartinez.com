@@ -17,4 +17,6 @@ test('contacto: título, texto y 3 vías', () => {
     ],
   );
   assert.ok(isSafeExternal(links[0]) && isSafeExternal(links[1]));
+  assert.match(links[0].getAttribute('class'), /\bbtn-red\b/);
+  assert.doesNotMatch(links[1].getAttribute('class') ?? '', /\bbtn-red\b/);
 });

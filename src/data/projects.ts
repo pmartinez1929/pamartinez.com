@@ -19,6 +19,8 @@ export interface Project {
   image: ImageMetadata;
   tech: { name: string; icon: ImageMetadata };
   cta: 'Visitar' | 'Explorar';
+  /** Una línea sobre el problema y lo que se hizo; opcional, la tarjeta la muestra solo si existe. */
+  description?: string;
   /** Esquina de la tarjeta donde va el badge de tecnología (apunta al centro de la grilla). */
   corner: Corner;
 }

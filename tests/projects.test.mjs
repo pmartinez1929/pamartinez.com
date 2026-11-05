@@ -29,3 +29,9 @@ test('6 proyectos en orden, con captura, tecnología y CTA', () => {
     assert.ok(card.querySelector(`img[alt="${tech}"]`));
   });
 });
+
+test('sin description, las tarjetas no muestran párrafo extra', () => {
+  for (const card of page().querySelectorAll('#proyectos article')) {
+    assert.equal(card.querySelector('p'), null);
+  }
+});

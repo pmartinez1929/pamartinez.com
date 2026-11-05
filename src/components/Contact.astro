@@ -6,6 +6,7 @@ const items = [
   { label: site.cta.calendly, href: site.contact.calendly, icon: '/svg/icon-calendar.svg', h: 19, external: true },
   { label: site.cta.email, href: `mailto:${site.contact.email}`, icon: '/svg/icon-email.svg', h: 15, external: false },
 ];
+const [primary, ...secondary] = items;
 ---
 
 <div class="relative overflow-x-clip">
@@ -27,8 +28,17 @@ const items = [
       {site.cta.accent}
     </p>
     <p class="mb-6">{site.cta.text}</p>
+    <a
+      class="btn btn-red mb-6 flex items-center justify-center gap-3"
+      href={primary.href}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img src={primary.icon} alt="" width="19" height={primary.h} />
+      {primary.label}
+    </a>
     {
-      items.map((item) => (
+      secondary.map((item) => (
         <a
           class="group mb-5 flex font-medium"
           href={item.href}

@@ -35,6 +35,7 @@ export const site = {
     text: 'Soy curioso y autodidacta. Me gusta entender qué necesita realmente una idea y cómo convertirla en un producto digital que la gente use.',
   },
   projectsLabel: 'Proyectos',
+  processLabel: 'Cómo trabajo',
   clientsLabel: 'He trabajado',
   socials: [
     { label: 'LinkedIn', url: 'https://www.linkedin.com/in/pmartinezesp/' },

@@ -1,4 +1,5 @@
 import { readFileSync, existsSync } from 'node:fs';
+import assert from 'node:assert/strict';
 import { parse } from 'node-html-parser';
 
 const dist = new URL('../dist/', import.meta.url);
@@ -24,4 +25,12 @@ export function t(el) {
 export function isSafeExternal(a) {
   const rel = (a.getAttribute('rel') ?? '').split(/\s+/);
   return a.getAttribute('target') === '_blank' && rel.includes('noopener') && rel.includes('noreferrer');
+}
+
+/** Etiqueta y título del SectionHeading de una sección. */
+export function sectionHeading(section) {
+  const wrap = section.querySelector('[data-section-heading]');
+  assert.ok(wrap, 'falta SectionHeading');
+  assert.equal(wrap.firstElementChild?.tagName, 'P', 'el eyebrow debe ir antes del h2');
+  return { eyebrow: t(wrap.querySelector('p')), title: t(wrap.querySelector('h2')) };
 }

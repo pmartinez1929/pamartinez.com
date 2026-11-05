@@ -21,10 +21,11 @@ Todo el contenido está en `src/data/`:
 
 | Archivo | Contenido |
 | --- | --- |
-| `site.ts` | Nombre, SEO, contacto, redes y textos de hero, Intuyo, "Quien soy" y contacto |
+| `site.ts` | Nombre, SEO, contacto, menú, redes y textos de hero, Intuyo (estado y CTA), "Quién soy" y contacto |
 | `services.ts` | Servicios (Desarrollo digital, Diseño UX) |
-| `clients.ts` | Logos de "He trabajado" |
+| `clients.ts` | Logos de "He trabajado con" |
 | `projects.ts` | Proyectos (captura, URL, tecnología, CTA) |
+| `process.ts` | Pasos de "Cómo trabajo" |
 
 Las imágenes van en `src/assets/` (Astro las optimiza) y los SVG decorativos en `public/svg/`.
 

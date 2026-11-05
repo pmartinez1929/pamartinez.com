@@ -6,10 +6,24 @@ test('index tiene lang es, viewport y título del sitio', () => {
   const doc = page();
   assert.equal(doc.querySelector('html').getAttribute('lang'), 'es');
   assert.ok(doc.querySelector('meta[name="viewport"]'));
-  assert.equal(doc.querySelector('title').text, 'Pablo A Martínez | Frontend Developer y UX Designer');
+  assert.equal(doc.querySelector('title').text, 'Pablo A Martínez | Diseñador de producto y desarrollador');
 });
 
 test('index carga la hoja de estilos compilada', () => {
   const doc = page();
   assert.ok(doc.querySelector('link[rel="stylesheet"]') || doc.querySelector('style'));
+});
+
+test('las secciones aparecen en el orden nuevo', () => {
+  const ids = page().querySelectorAll('main section[id]').map((s) => s.getAttribute('id'));
+  assert.deepEqual(ids, ['inicio', 'clientes', 'servicios', 'proceso', 'proyectos', 'intuyo', 'sobre-mi', 'contacto']);
+});
+
+test('cada sección (menos el hero) tiene un solo h2 y no quedan pastillas', () => {
+  const doc = page();
+  for (const s of doc.querySelectorAll('main section[id]')) {
+    if (s.getAttribute('id') === 'inicio') continue;
+    assert.equal(s.querySelectorAll('h2').length, 1, s.getAttribute('id'));
+  }
+  assert.equal(doc.querySelectorAll('.pill').length, 0);
 });

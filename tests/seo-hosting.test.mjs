@@ -5,9 +5,9 @@ import { page, distHas, distText } from './helpers.mjs';
 test('meta SEO, canonical y Open Graph', () => {
   const doc = page();
   const meta = (sel) => doc.querySelector(sel)?.getAttribute('content');
-  assert.match(meta('meta[name="description"]'), /^Ideando productos digitales/);
+  assert.match(meta('meta[name="description"]'), /^Combino diseño UX, desarrollo y herramientas de IA/);
   assert.equal(doc.querySelector('link[rel="canonical"]').getAttribute('href'), 'https://pamartinez.com/');
-  assert.equal(meta('meta[property="og:title"]'), 'Pablo A Martínez | Frontend Developer y UX Designer');
+  assert.equal(meta('meta[property="og:title"]'), 'Pablo A Martínez | Diseñador de producto y desarrollador');
   assert.equal(meta('meta[property="og:url"]'), 'https://pamartinez.com/');
   assert.equal(meta('meta[property="og:image"]'), 'https://pamartinez.com/icons/icon-512x512.png');
   assert.equal(meta('meta[name="twitter:creator"]'), '@pmartinez1929');

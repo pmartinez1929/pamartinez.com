@@ -1,45 +1,66 @@
+// Los años de experiencia se calculan en cada build a partir de este año
+const startYear = 2015;
+const years = new Date().getFullYear() - startYear;
+
+const whatsappMessage = 'Hola Pablo, vi tu web y quiero conversar sobre un proyecto.';
+
 export const site = {
   name: 'Pablo Martínez',
   url: 'https://pamartinez.com',
-  title: 'Pablo A Martínez | Frontend Developer y UX Designer',
+  title: 'Pablo A Martínez | Diseñador de producto y desarrollador',
   description:
-    'Ideando productos digitales centrados en los objetivos del usuario. La importancia de un buen diseño parte de una necesidad, analiza, prototipa, ejecuta.',
+    'Combino diseño UX, desarrollo y herramientas de IA para llevar tu idea a una web o app real, más rápido y sin perder calidad.',
   twitter: '@pmartinez1929',
   contact: {
-    whatsapp: 'https://api.whatsapp.com/send?phone=593995027973',
+    whatsapp: `https://api.whatsapp.com/send?phone=593995027973&text=${encodeURIComponent(whatsappMessage)}`,
     calendly: 'https://calendly.com/pmartinez1929/reunion',
-    email: 'pmartinezesp@outlook.com',
+    email: 'hola@pamartinez.com',
   },
   hero: {
-    titleLine1: 'Desarrollador Front-end',
-    titleLine2: 'diseñador UX',
-    cta: 'Contáctanos',
+    titleLine1: 'Diseñador de producto',
+    titleLine2: 'desarrollador',
+    cta: 'Hablemos',
+    secondaryCta: 'Ver proyectos →',
   },
   company: { name: 'Blubear.io', url: 'https://blubear.io/' },
+  nav: [
+    { label: 'Servicios', href: '#servicios' },
+    { label: 'Proyectos', href: '#proyectos' },
+    { label: 'Intuyo', href: '#intuyo' },
+    { label: 'Contacto', href: '#contacto' },
+  ],
   intuyo: {
-    label: 'Entusiasta de',
-    text: 'La idea de Intuyo es analizar, idear y mejorar la experiencia de usuarios en entornos digitales. Permitiendo crear sistemas digitales que cumplan con el objetivo del negocio y que estén orientados a usuarios finales.',
+    name: 'Intuyo',
+    text: 'Intuyo es el proyecto que estoy construyendo para analizar, idear y mejorar la experiencia de los usuarios en entornos digitales: sistemas que cumplen los objetivos del negocio y están pensados para las personas que los usan.',
+    status: 'La web de Intuyo está en desarrollo.',
+    instagram: 'https://www.instagram.com/intuyo.dev/',
+    ctaLabel: 'Sigue el proyecto en Instagram',
   },
   about: {
-    label: 'Quien soy',
-    bioBefore:
-      'Soy Pablo Martínez he trabajado aproximadamente 8 años como desarrollador Front-end para diferentes marcas. Actualmente me encuentro trabajando para',
-    text: 'Persona curiosa y autodidacta que busca ayudar a comprender cuales son las necesidades de una idea, y como esta puede hacerse realizad a través de un producto digital.',
+    bioBefore: `Soy Pablo Martínez, desarrollador Front-end con más de ${years} años de experiencia creando productos digitales para distintas marcas. Actualmente trabajo en`,
+    text: 'Soy curioso y autodidacta. Me gusta entender qué necesita realmente una idea y cómo convertirla en un producto digital que la gente use.',
   },
-  projectsLabel: 'Proyectos',
-  clientsLabel: 'He trabajado',
+  processIntro: 'Un proceso simple en 4 pasos, de la idea al producto publicado.',
+  // Títulos de sección: etiqueta (eyebrow) + h2
+  sections: {
+    clients: { eyebrow: 'Clientes', title: 'He trabajado con' },
+    services: { eyebrow: 'Servicios', title: 'Qué hago' },
+    process: { eyebrow: 'Proceso', title: 'Cómo trabajo' },
+    projects: { eyebrow: 'Portafolio', title: 'Proyectos' },
+    intuyo: { eyebrow: 'Estoy creando', title: 'Intuyo' },
+    about: { eyebrow: 'Sobre mí', title: 'Quién soy' },
+  },
   socials: [
     { label: 'LinkedIn', url: 'https://www.linkedin.com/in/pmartinezesp/' },
     { label: 'GitHub', url: 'https://github.com/pmartinez1929' },
     { label: 'Behance', url: 'https://www.behance.net/pablomartinez102' },
-    { label: 'Instagram', url: 'https://www.instagram.com/intuyo.dev/' },
   ],
   cta: {
     title: '¿Tienes una idea?',
     accent: 'conecta',
-    text: 'Conversemos como una idea se puede convertir en una solución digital y como poder llegar a lograrlo.',
-    whatsapp: 'Contactame al Whatsapp',
-    calendly: 'Agenda una reunión (gratuita)',
-    email: 'Escribe un correo electrónico',
+    text: 'Conversemos sobre cómo convertir tu idea en una solución digital y qué pasos necesitas para lograrlo.',
+    whatsapp: 'Escríbeme por WhatsApp',
+    calendly: 'Agenda una reunión gratuita',
+    email: 'Escríbeme un correo',
   },
 };

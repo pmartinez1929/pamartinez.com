@@ -1,0 +1,29 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import { steps } from '../data/process';
+import { site } from '../data/site';
+---
+
+<section id="proceso" class="bg-mist">
+  <div class="mx-auto grid max-w-[1000px] gap-10 px-6 py-16 md:grid-cols-[1fr_1.6fr]">
+    <div>
+      <SectionHeading {...site.sections.process} />
+      <p class="mt-4 text-lg">{site.processIntro}</p>
+    </div>
+    <ol>
+      {
+        steps.map((s, i) => (
+          <li class:list={['flex gap-5 py-5', i < steps.length - 1 && 'border-b border-black/10']}>
+            <span aria-hidden="true" class="w-12 shrink-0 font-display text-3xl leading-none text-red">
+              {s.number}
+            </span>
+            <div>
+              <h3 class="font-display text-xl text-navy">{s.title}</h3>
+              <p class="mt-1">{s.text}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

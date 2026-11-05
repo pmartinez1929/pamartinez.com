@@ -11,6 +11,7 @@
   --color-red: #e63946;
   --color-ink: #1e1e1e;
   --color-muted: #b1b1b1;
+  --color-mist: #f4f6f8;
 
   --font-display: "Vidaloka", Georgia, serif;
   --font-sans: "Quicksand", system-ui, sans-serif;
@@ -30,15 +31,6 @@
 }
 
 @layer components {
-  .pill {
-    display: inline-block;
-    margin-bottom: 20px;
-    border-radius: 20px;
-    padding: 4px 16px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #fff;
-  }
   .btn {
     display: inline-block;
     border-radius: 20px;
@@ -61,5 +53,24 @@
   }
   .btn-cream:hover {
     background-color: var(--color-aqua);
+  }
+  .btn-navy {
+    background-color: var(--color-navy);
+    color: #fff;
+  }
+  .btn-navy:hover {
+    background-color: var(--color-blue);
+  }
+}
+
+@layer base {
+  /* El header fijo mide 80px: las anclas dejan aire para no tapar el título de la sección */
+  html {
+    scroll-padding-top: 96px;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 }

@@ -4,8 +4,16 @@ import logo from '../assets/brand/logo-pmartinez.png';
 import { site } from '../data/site';
 ---
 
-<header class="mt-6 flex h-20 items-center justify-center bg-cream px-4 md:px-[38px]">
-  <a href="/" aria-label="Inicio">
-    <Image src={logo} alt={site.name} height={60} class="h-[60px] w-auto" loading="eager" />
-  </a>
+<header class="sticky top-0 z-50 bg-cream">
+  <div class="mx-auto flex h-20 max-w-[1100px] items-center justify-between px-4 md:px-[38px]">
+    <a href="/" aria-label="Inicio">
+      <Image src={logo} alt={site.name} height={60} class="h-[60px] w-auto" loading="eager" />
+    </a>
+    <nav aria-label="Secciones" class="hidden gap-8 font-medium text-navy md:flex">
+      {site.nav.map((item) => <a class="hover:text-red" href={item.href}>{item.label}</a>)}
+    </nav>
+    <a class="btn btn-red" href={site.contact.whatsapp} target="_blank" rel="noopener noreferrer">
+      {site.hero.cta}
+    </a>
+  </div>
 </header>

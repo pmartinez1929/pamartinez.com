@@ -1,8 +1,51 @@
 ---
+import { Image } from 'astro:assets';
+import behance from 'bootstrap-icons/icons/behance.svg?raw';
+import github from 'bootstrap-icons/icons/github.svg?raw';
+import instagram from 'bootstrap-icons/icons/instagram.svg?raw';
+import linkedin from 'bootstrap-icons/icons/linkedin.svg?raw';
+import logo from '../assets/brand/logo-pmartinez.png';
 import { site } from '../data/site';
+
 const year = new Date().getFullYear();
+const icons: Record<string, string> = { LinkedIn: linkedin, GitHub: github, Behance: behance };
+const links = [
+  ...site.socials.map((s) => ({ ...s, icon: icons[s.label] })),
+  { label: site.intuyo.name, url: site.intuyo.instagram, icon: instagram },
+];
+// Ícono decorativo a 24 px: el nombre accesible lo da el aria-label del link
+const sized = (svg: string) => svg.replace(/width="16" height="16"/, 'width="24" height="24" aria-hidden="true"');
 ---
 
-<footer class="relative bg-navy p-4 text-center text-white">
-  {site.name} &nbsp;·&nbsp; © {year}
+<footer class="bg-navy text-white">
+  <div class="mx-auto max-w-[1100px] px-6 py-8">
+    <div class="flex items-center justify-between gap-6">
+      <nav aria-label="Redes" class="flex flex-wrap gap-5">
+        {
+          links.map((l) => (
+            <a
+              class="hover:text-aqua focus-visible:outline-white"
+              href={l.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={l.label}
+              set:html={sized(l.icon)}
+            />
+          ))
+        }
+      </nav>
+      <a href="#inicio" aria-label="Volver al inicio" class="focus-visible:outline-white">
+        {/* El isotipo es un degradado azul que se pierde sobre navy: se muestra en blanco */}
+        <Image src={logo} alt="" height={44} class="h-11 w-auto brightness-0 invert" />
+      </a>
+    </div>
+    <div
+      class="mt-6 flex flex-col items-center gap-2 border-t border-white/15 pt-6 text-sm sm:flex-row sm:justify-between"
+    >
+      <a class="hover:text-aqua focus-visible:outline-white" href={`mailto:${site.contact.email}`}>
+        {site.contact.email}
+      </a>
+      <p>{site.name} &nbsp;·&nbsp; © {year}</p>
+    </div>
+  </div>
 </footer>

@@ -3,7 +3,7 @@ import { site } from '../data/site';
 ---
 
 <section id="inicio" class="mx-auto my-[60px] flex max-w-[664px] flex-col items-center px-6 md:my-[100px] md:px-0">
-  <h1 class="w-full font-display text-2xl leading-tight font-bold text-navy md:text-[64px] md:leading-[62px] tracking-[-0.01em]">
+  <h1 class="w-fit max-w-full font-display text-2xl leading-tight font-bold text-navy md:text-[64px] md:leading-[62px] tracking-[-0.01em]">
     <span class="block">{site.hero.titleLine1}</span>{' '}
     <span class="mt-2 flex items-center justify-end gap-3 text-muted">
       <span
@@ -15,8 +15,11 @@ import { site } from '../data/site';
   </h1>
   <div class="flex w-full flex-col items-start md:w-[442px]">
     <p class="my-[35px] max-w-[680px]">{site.description}</p>
-    <a class="btn btn-red" href={site.contact.whatsapp} target="_blank" rel="noopener noreferrer">
-      {site.hero.cta}
-    </a>
+    <div class="grid w-full gap-4 sm:w-auto sm:grid-cols-2">
+      <a class="btn btn-red sm:min-w-[190px]" href={site.contact.whatsapp} target="_blank" rel="noopener noreferrer">
+        {site.hero.cta}
+      </a>
+      <a class="btn btn-navy sm:min-w-[190px]" href="#proyectos">{site.hero.secondaryCta}</a>
+    </div>
   </div>
 </section>

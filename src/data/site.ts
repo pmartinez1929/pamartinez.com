@@ -31,7 +31,6 @@ export const site = {
   ],
   intuyo: {
     name: 'Intuyo',
-    label: 'Estoy creando',
     text: 'Intuyo es el proyecto que estoy construyendo para analizar, idear y mejorar la experiencia de los usuarios en entornos digitales: sistemas que cumplen los objetivos del negocio y están pensados para las personas que los usan.',
     status: 'La web de Intuyo está en desarrollo.',
     instagram: 'https://www.instagram.com/intuyo.dev/',

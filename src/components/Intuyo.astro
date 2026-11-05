@@ -1,27 +1,26 @@
 ---
-import { Image, getImage } from 'astro:assets';
-import background from '../assets/brand/intuyo-background.jpg';
-import wordmark from '../assets/brand/intuyo-wordmark.png';
+import SectionHeading from './SectionHeading.astro';
 import { site } from '../data/site';
-
-const bg = await getImage({ src: background, format: 'webp', width: 1600 });
 ---
 
-<section
-  id="intuyo"
-  class="flex min-h-[710px] items-center py-10 justify-center bg-cover bg-center md:bg-fixed"
-  style={`background-image: url('${bg.src}')`}
->
-  <div class="flex w-[90%] max-w-[710px] flex-col items-center rounded-[18px] bg-white/90 p-6 md:p-10">
-    <div class="w-full max-w-[320px]">
-      <h2 class="pill bg-red">{site.intuyo.label}</h2>
-      <img src="/svg/intuyo-badge.svg" alt="Intuyo" width="326" height="158" class="w-full" />
+<section id="intuyo" class="bg-navy text-white">
+  <div class="mx-auto grid max-w-[1100px] items-center gap-12 px-6 py-20 md:grid-cols-[1.2fr_1fr]">
+    <div>
+      <SectionHeading {...site.sections.intuyo} tone="dark" />
+      <p class="mt-5 text-white/90">{site.intuyo.text}</p>
+      <p class="mt-3 text-sm text-aqua">{site.intuyo.status}</p>
+      {/* hover y foco propios: el hover navy de .btn-red y el outline navy global no se ven sobre la banda navy */}
+      <a
+        class="btn btn-red mt-8 hover:bg-blue focus-visible:outline-white"
+        href={site.intuyo.instagram}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {site.intuyo.ctaLabel}
+      </a>
     </div>
-    <p class="mt-5 max-w-[80%] text-center">{site.intuyo.text}</p>
-    <p class="mt-3 text-sm">{site.intuyo.status}</p>
-    <a class="btn btn-red mt-6 mb-[50px]" href={site.intuyo.instagram} target="_blank" rel="noopener noreferrer">
-      {site.intuyo.ctaLabel}
-    </a>
-    <Image src={wordmark} alt="" width={303} />
+    <div class="order-first flex items-center justify-center rounded-2xl bg-white p-8 md:order-none">
+      <img src="/svg/intuyo-badge.svg" alt="Intuyo" width="326" height="158" class="w-full max-w-[280px]" />
+    </div>
   </div>
 </section>

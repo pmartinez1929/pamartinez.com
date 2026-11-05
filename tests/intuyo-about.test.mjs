@@ -2,10 +2,11 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { page, t, isSafeExternal, sectionHeading } from './helpers.mjs';
 
-test('sección Intuyo con pill, logo, texto, estado y CTA a Instagram', () => {
+test('sección Intuyo con título, logo, texto, estado y CTA a Instagram', () => {
   const s = page().querySelector('#intuyo');
   assert.ok(s);
-  assert.equal(t(s.querySelector('h2')), 'Estoy creando');
+  assert.deepEqual(sectionHeading(s), { eyebrow: 'Estoy creando', title: 'Intuyo' });
+  assert.ok(!s.getAttribute('style'), 'sin imagen de fondo inline');
   assert.ok(s.querySelector('img[alt="Intuyo"]'));
   assert.match(t(s), /Intuyo es el proyecto que estoy construyendo para analizar, idear y mejorar la experiencia de los usuarios en entornos digitales/);
   assert.match(t(s), /La web de Intuyo está en desarrollo\./);

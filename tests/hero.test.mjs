@@ -68,6 +68,8 @@ test('hero: Hablemos y Ver proyectos del mismo ancho, el secundario en navy', ()
   assert.equal(secondary.getAttribute('href'), '#proyectos');
   assert.match(secondary.getAttribute('class'), /\bbtn-navy\b/);
   for (const a of links) assert.match(a.getAttribute('class'), /sm:min-w-\[190px\]/);
+  assert.match(primary.parentNode.getAttribute('class'), /\bgrid\b/);
+  assert.match(primary.parentNode.getAttribute('class'), /sm:grid-cols-2/);
   assert.equal(page().querySelectorAll('.btn-outline').length, 0);
 });
 

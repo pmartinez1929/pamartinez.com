@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { page, t, sectionHeading } from './helpers.mjs';
 
-test('cómo trabajo: h2 y 4 pasos en lista ordenada', () => {
+test('cómo trabajo: título, intro y 4 pasos en lista ordenada', () => {
   const s = page().querySelector('#proceso');
   assert.ok(s);
   assert.deepEqual(sectionHeading(s), { eyebrow: 'Proceso', title: 'Cómo trabajo' });

@@ -15,7 +15,7 @@ import { site } from '../data/site';
   </h1>
   <div class="flex w-full flex-col items-start md:w-[442px]">
     <p class="my-[35px] max-w-[680px]">{site.description}</p>
-    <div class="flex w-full flex-col gap-4 sm:w-auto sm:flex-row">
+    <div class="grid w-full gap-4 sm:w-auto sm:grid-cols-2">
       <a class="btn btn-red sm:min-w-[190px]" href={site.contact.whatsapp} target="_blank" rel="noopener noreferrer">
         {site.hero.cta}
       </a>

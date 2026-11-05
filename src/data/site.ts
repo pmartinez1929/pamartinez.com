@@ -25,6 +25,9 @@ export const site = {
   intuyo: {
     label: 'Estoy creando',
     text: 'Intuyo es el proyecto que estoy construyendo para analizar, idear y mejorar la experiencia de los usuarios en entornos digitales: sistemas que cumplen los objetivos del negocio y están pensados para las personas que los usan.',
+    status: 'La web de Intuyo está en desarrollo.',
+    instagram: 'https://www.instagram.com/intuyo.dev/',
+    ctaLabel: 'Sigue el proyecto en Instagram',
   },
   about: {
     label: 'Quién soy',
@@ -37,7 +40,6 @@ export const site = {
     { label: 'LinkedIn', url: 'https://www.linkedin.com/in/pmartinezesp/' },
     { label: 'GitHub', url: 'https://github.com/pmartinez1929' },
     { label: 'Behance', url: 'https://www.behance.net/pablomartinez102' },
-    { label: 'Instagram', url: 'https://www.instagram.com/intuyo.dev/' },
   ],
   cta: {
     title: '¿Tienes una idea?',

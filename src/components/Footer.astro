@@ -1,8 +1,21 @@
 ---
 import { site } from '../data/site';
 const year = new Date().getFullYear();
+const links = [...site.socials, { label: 'Intuyo', url: site.intuyo.instagram }];
 ---
 
-<footer class="relative bg-navy p-4 text-center text-white">
-  {site.name} &nbsp;·&nbsp; © {year}
+<footer class="relative bg-navy px-4 py-8 text-center text-white">
+  <nav aria-label="Redes" class="mb-3 flex flex-wrap justify-center gap-x-6 gap-y-2 font-medium">
+    {
+      links.map((l) => (
+        <a class="hover:text-aqua focus-visible:outline-white" href={l.url} target="_blank" rel="noopener noreferrer">
+          {l.label}
+        </a>
+      ))
+    }
+  </nav>
+  <a class="mb-4 inline-block hover:text-aqua focus-visible:outline-white" href={`mailto:${site.contact.email}`}>
+    {site.contact.email}
+  </a>
+  <p>{site.name} &nbsp;·&nbsp; © {year}</p>
 </footer>

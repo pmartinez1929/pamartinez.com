@@ -17,7 +17,11 @@ const bg = await getImage({ src: background, format: 'webp', width: 1600 });
       <h2 class="pill bg-red">{site.intuyo.label}</h2>
       <img src="/svg/intuyo-badge.svg" alt="Intuyo" width="326" height="158" class="w-full" />
     </div>
-    <p class="mt-5 mb-[50px] max-w-[80%] text-center">{site.intuyo.text}</p>
+    <p class="mt-5 max-w-[80%] text-center">{site.intuyo.text}</p>
+    <p class="mt-3 text-sm">{site.intuyo.status}</p>
+    <a class="btn btn-red mt-6 mb-[50px]" href={site.intuyo.instagram} target="_blank" rel="noopener noreferrer">
+      {site.intuyo.ctaLabel}
+    </a>
     <Image src={wordmark} alt="" width={303} />
   </div>
 </section>

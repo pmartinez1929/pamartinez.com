@@ -23,7 +23,19 @@ test('hero muestra la bajada y el CTA a WhatsApp', () => {
   assert.ok(isSafeExternal(cta));
 });
 
-test('footer muestra nombre y año actual', () => {
+test('footer muestra redes, Intuyo, correo, nombre y año actual', () => {
   const footer = page().querySelector('footer');
-  assert.equal(t(footer), `Pablo Martínez · © ${new Date().getFullYear()}`);
+  const expected = [
+    ['LinkedIn', 'https://www.linkedin.com/in/pmartinezesp/'],
+    ['GitHub', 'https://github.com/pmartinez1929'],
+    ['Behance', 'https://www.behance.net/pablomartinez102'],
+    ['Intuyo', 'https://www.instagram.com/intuyo.dev/'],
+  ];
+  const social = footer.querySelectorAll('nav a');
+  assert.deepEqual(social.map((a) => [t(a), a.getAttribute('href')]), expected);
+  for (const a of social) assert.ok(isSafeExternal(a));
+  const mail = footer.querySelector('a[href="mailto:hola@pamartinez.com"]');
+  assert.ok(mail);
+  assert.equal(t(mail), 'hola@pamartinez.com');
+  assert.equal(t(footer.querySelector('p')), `Pablo Martínez · © ${new Date().getFullYear()}`);
 });

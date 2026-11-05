@@ -2,13 +2,17 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { page, t, isSafeExternal } from './helpers.mjs';
 
-test('sección Intuyo con pill, logo y texto', () => {
+test('sección Intuyo con pill, logo, texto, estado y CTA a Instagram', () => {
   const s = page().querySelector('#intuyo');
   assert.ok(s);
-  assert.match(t(s), /^Estoy creando/);
   assert.equal(t(s.querySelector('h2')), 'Estoy creando');
   assert.ok(s.querySelector('img[alt="Intuyo"]'));
   assert.match(t(s), /Intuyo es el proyecto que estoy construyendo para analizar, idear y mejorar la experiencia de los usuarios en entornos digitales/);
+  assert.match(t(s), /La web de Intuyo está en desarrollo\./);
+  const cta = s.querySelector('a');
+  assert.equal(t(cta), 'Sigue el proyecto en Instagram');
+  assert.equal(cta.getAttribute('href'), 'https://www.instagram.com/intuyo.dev/');
+  assert.ok(isSafeExternal(cta));
 });
 
 test('quien soy: foto, bio con Blubear y texto', () => {
@@ -23,17 +27,6 @@ test('quien soy: foto, bio con Blubear y texto', () => {
   assert.match(t(s), /Soy curioso y autodidacta/);
 });
 
-test('quien soy: 4 redes con links seguros', () => {
-  const expected = {
-    LinkedIn: 'https://www.linkedin.com/in/pmartinezesp/',
-    GitHub: 'https://github.com/pmartinez1929',
-    Behance: 'https://www.behance.net/pablomartinez102',
-    Instagram: 'https://www.instagram.com/intuyo.dev/',
-  };
-  const links = page().querySelectorAll('#sobre-mi [data-social]');
-  assert.equal(links.length, 4);
-  for (const a of links) {
-    assert.equal(a.getAttribute('href'), expected[t(a)]);
-    assert.ok(isSafeExternal(a));
-  }
+test('quien soy: sin botones de redes', () => {
+  assert.equal(page().querySelectorAll('#sobre-mi [data-social]').length, 0);
 });

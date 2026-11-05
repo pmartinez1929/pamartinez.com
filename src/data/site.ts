@@ -20,8 +20,15 @@ export const site = {
     titleLine1: 'Diseñador de producto',
     titleLine2: 'desarrollador',
     cta: 'Hablemos',
+    secondaryCta: 'Ver proyectos',
   },
   company: { name: 'Blubear.io', url: 'https://blubear.io/' },
+  nav: [
+    { label: 'Servicios', href: '#servicios' },
+    { label: 'Proyectos', href: '#proyectos' },
+    { label: 'Intuyo', href: '#intuyo' },
+    { label: 'Contacto', href: '#contacto' },
+  ],
   intuyo: {
     label: 'Estoy creando',
     text: 'Intuyo es el proyecto que estoy construyendo para analizar, idear y mejorar la experiencia de los usuarios en entornos digitales: sistemas que cumplen los objetivos del negocio y están pensados para las personas que los usan.',

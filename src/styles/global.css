@@ -62,4 +62,25 @@
   .btn-cream:hover {
     background-color: var(--color-aqua);
   }
+  .btn-outline {
+    border: 2px solid var(--color-navy);
+    padding: 6px 29px;
+    color: var(--color-navy);
+  }
+  .btn-outline:hover {
+    background-color: var(--color-navy);
+    color: #fff;
+  }
+}
+
+@layer base {
+  /* El header fijo mide 80px: las anclas dejan aire para no tapar el título de la sección */
+  html {
+    scroll-padding-top: 96px;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
 }

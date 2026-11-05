@@ -39,3 +39,36 @@ test('footer muestra redes, Intuyo, correo, nombre y año actual', () => {
   assert.equal(t(mail), 'hola@pamartinez.com');
   assert.equal(t(footer.querySelector('p')), `Pablo Martínez · © ${new Date().getFullYear()}`);
 });
+
+test('header fijo con 4 anclas y CTA a WhatsApp', () => {
+  const header = page().querySelector('header');
+  assert.match(header.getAttribute('class'), /\bsticky\b/);
+  const nav = header.querySelector('nav[aria-label="Secciones"]');
+  assert.deepEqual(
+    nav.querySelectorAll('a').map((a) => [t(a), a.getAttribute('href')]),
+    [
+      ['Servicios', '#servicios'],
+      ['Proyectos', '#proyectos'],
+      ['Intuyo', '#intuyo'],
+      ['Contacto', '#contacto'],
+    ],
+  );
+  const cta = [...header.querySelectorAll('a')].find((a) => t(a) === 'Hablemos');
+  assert.ok(cta);
+  assert.match(cta.getAttribute('href'), /^https:\/\/api\.whatsapp\.com\/send\?phone=593995027973&text=/);
+  assert.ok(isSafeExternal(cta));
+});
+
+test('hero tiene botón secundario a proyectos', () => {
+  const link = page().querySelector('#inicio a[href="#proyectos"]');
+  assert.ok(link);
+  assert.equal(t(link), 'Ver proyectos');
+});
+
+test('css: scroll-padding para el header fijo y smooth solo sin reduced-motion', async () => {
+  const { readdirSync, readFileSync } = await import('node:fs');
+  const dir = new URL('../dist/_astro/', import.meta.url);
+  const css = readdirSync(dir).filter((f) => f.endsWith('.css')).map((f) => readFileSync(new URL(f, dir), 'utf8')).join('\n');
+  assert.match(css, /scroll-padding-top:\s*96px/);
+  assert.match(css, /prefers-reduced-motion:\s*no-preference\)[^}]*\{[^}]*scroll-behavior:\s*smooth/);
+});

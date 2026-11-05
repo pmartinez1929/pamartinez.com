@@ -41,7 +41,6 @@ export const site = {
     bioBefore: `Soy Pablo Martínez, desarrollador Front-end con más de ${years} años de experiencia creando productos digitales para distintas marcas. Actualmente trabajo en`,
     text: 'Soy curioso y autodidacta. Me gusta entender qué necesita realmente una idea y cómo convertirla en un producto digital que la gente use.',
   },
-  projectsLabel: 'Proyectos',
   processIntro: 'Un proceso simple en 4 pasos, de la idea al producto publicado.',
   // Títulos de sección: etiqueta (eyebrow) + h2
   sections: {

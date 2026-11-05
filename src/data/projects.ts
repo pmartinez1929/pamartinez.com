@@ -11,8 +11,6 @@ import wordpress from '../assets/tech/wordpress.png';
 import figma from '../assets/tech/figma.png';
 import codeigniter from '../assets/tech/codeigniter.png';
 
-export type Corner = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
-
 export interface Project {
   name: string;
   url: string;
@@ -21,8 +19,6 @@ export interface Project {
   cta: 'Visitar' | 'Explorar';
   /** Una línea sobre el problema y lo que se hizo; opcional, la tarjeta la muestra solo si existe. */
   description?: string;
-  /** Esquina de la tarjeta donde va el badge de tecnología (apunta al centro de la grilla). */
-  corner: Corner;
 }
 
 const tech = {
@@ -34,17 +30,16 @@ const tech = {
 };
 
 export const projects: Project[] = [
-  { name: '1001 Carros', url: 'https://1001carros.com/', image: carros, tech: tech.nuxt, cta: 'Visitar', corner: 'bottom-right' },
-  { name: 'OAG Pro', url: 'https://www.oagpro.com/', image: oag, tech: tech.vue, cta: 'Visitar', corner: 'bottom-left' },
-  { name: 'Corpo Médica', url: 'https://corpo-medica.com/', image: corpomedica, tech: tech.wordpress, cta: 'Visitar', corner: 'top-right' },
+  { name: '1001 Carros', url: 'https://1001carros.com/', image: carros, tech: tech.nuxt, cta: 'Visitar' },
+  { name: 'OAG Pro', url: 'https://www.oagpro.com/', image: oag, tech: tech.vue, cta: 'Visitar' },
+  { name: 'Corpo Médica', url: 'https://corpo-medica.com/', image: corpomedica, tech: tech.wordpress, cta: 'Visitar' },
   {
     name: 'PetHomie',
     url: 'https://www.figma.com/file/rsOXMJBZT28xMy6sdQzJcG/PetHomie?node-id=11%3A298&t=gMvQ7C8RGV3iCeEp-1',
     image: pethomie,
     tech: tech.figma,
     cta: 'Explorar',
-    corner: 'top-left',
   },
-  { name: 'Maxus Ecuador', url: 'https://www.maxusecuador.com/', image: maxus, tech: tech.nuxt, cta: 'Visitar', corner: 'bottom-right' },
-  { name: 'Valiente', url: 'https://valiente.pamartinez.com/', image: valiente, tech: tech.codeigniter, cta: 'Visitar', corner: 'bottom-left' },
+  { name: 'Maxus Ecuador', url: 'https://www.maxusecuador.com/', image: maxus, tech: tech.nuxt, cta: 'Visitar' },
+  { name: 'Valiente', url: 'https://valiente.pamartinez.com/', image: valiente, tech: tech.codeigniter, cta: 'Visitar' },
 ];

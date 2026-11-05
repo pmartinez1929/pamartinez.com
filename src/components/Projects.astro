@@ -1,10 +1,13 @@
 ---
 import ProjectCard from './ProjectCard.astro';
+import SectionHeading from './SectionHeading.astro';
 import { projects } from '../data/projects';
 import { site } from '../data/site';
 ---
 
-<section id="proyectos" aria-label={site.projectsLabel} class="grid grid-cols-2">
-  <h2 class="sr-only">{site.projectsLabel}</h2>
-  {projects.map((project) => <ProjectCard project={project} />)}
+<section id="proyectos" class="mx-auto max-w-[1100px] px-6 py-16">
+  <SectionHeading {...site.sections.projects} />
+  <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {projects.map((project) => <ProjectCard project={project} />)}
+  </div>
 </section>

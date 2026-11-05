@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import type { Corner, Project } from '../data/projects';
+import type { Project } from '../data/projects';
 
 interface Props {
   project: Project;
@@ -8,40 +8,34 @@ interface Props {
 
 const { project } = Astro.props;
 
-const cornerClass: Record<Corner, string> = {
-  'top-left': 'top-0 left-0 rounded-br-xl',
-  'top-right': 'top-0 right-0 rounded-bl-xl',
-  'bottom-left': 'bottom-0 left-0 rounded-tr-xl',
-  'bottom-right': 'bottom-0 right-0 rounded-tl-xl',
-};
+// Texto visible del CTA; el aria-label lo incluye para cumplir WCAG 2.5.3 (label in name)
+const ctaLabel: Record<Project['cta'], string> = { Visitar: 'Visitar sitio', Explorar: 'Ver prototipo' };
+const label = ctaLabel[project.cta];
 ---
 
-<article class="flex flex-col">
-  <div class="group relative aspect-[1600/1085] overflow-hidden">
-    <Image
-      src={project.image}
-      alt={`Captura de ${project.name}`}
-      widths={[400, 800, 1200]}
-      sizes="(min-width: 768px) 50vw, 50vw"
-      class="size-full object-cover"
-    />
-    <div class:list={['absolute flex size-12 items-center justify-center bg-white/90 md:size-[100px]', cornerClass[project.corner]]}>
-      <Image src={project.tech.icon} alt={project.tech.name} width={60} class="h-auto w-6 md:w-[60px]" />
-    </div>
-    <div
-      class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity duration-300 group-focus-within:opacity-100 group-hover:opacity-100"
+<article
+  class="relative flex flex-col overflow-hidden rounded-2xl border border-black/10 bg-white transition duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+>
+  <Image
+    src={project.image}
+    alt={`Captura de ${project.name}`}
+    widths={[400, 800]}
+    sizes="(min-width: 1024px) 350px, (min-width: 640px) 50vw, 100vw"
+    class="aspect-[16/10] w-full object-cover object-top"
+  />
+  <div class="flex flex-1 flex-col p-5">
+    <p class="text-xs font-bold tracking-wide text-blue uppercase">{project.tech.name}</p>
+    <h3 class="mt-1 font-display text-xl text-navy">{project.name}</h3>
+    {project.description && <p class="mt-2 text-sm">{project.description}</p>}
+    <!-- after:inset-0 extiende el link a toda la tarjeta sin anidar enlaces -->
+    <a
+      href={project.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${label} de ${project.name}`}
+      class="mt-auto pt-4 font-bold text-red after:absolute after:inset-0"
     >
-      <a
-        href={project.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`${project.cta} ${project.name}`}
-        class="flex items-center rounded-xl bg-white px-4 py-1 font-medium text-black"
-      >
-        <img src="/svg/icon-link.svg" alt="" width="20" height="20" class="mr-4" />
-        {project.cta}
-      </a>
-    </div>
+      {label} →
+    </a>
   </div>
-  {project.description && <p class="p-4 text-sm">{project.description}</p>}
 </article>

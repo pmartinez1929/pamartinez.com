@@ -15,11 +15,11 @@ import { site } from '../data/site';
   </h1>
   <div class="flex w-full flex-col items-start md:w-[442px]">
     <p class="my-[35px] max-w-[680px]">{site.description}</p>
-    <div class="flex flex-wrap gap-4">
-      <a class="btn btn-red" href={site.contact.whatsapp} target="_blank" rel="noopener noreferrer">
+    <div class="flex w-full flex-col gap-4 sm:w-auto sm:flex-row">
+      <a class="btn btn-red sm:min-w-[190px]" href={site.contact.whatsapp} target="_blank" rel="noopener noreferrer">
         {site.hero.cta}
       </a>
-      <a class="btn btn-outline" href="#proyectos">{site.hero.secondaryCta}</a>
+      <a class="btn btn-navy sm:min-w-[190px]" href="#proyectos">{site.hero.secondaryCta}</a>
     </div>
   </div>
 </section>

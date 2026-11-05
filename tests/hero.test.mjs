@@ -59,10 +59,16 @@ test('header fijo con 4 anclas y CTA a WhatsApp', () => {
   assert.ok(isSafeExternal(cta));
 });
 
-test('hero tiene botón secundario a proyectos', () => {
-  const link = page().querySelector('#inicio a[href="#proyectos"]');
-  assert.ok(link);
-  assert.equal(t(link), 'Ver proyectos');
+test('hero: Hablemos y Ver proyectos del mismo ancho, el secundario en navy', () => {
+  const links = page().querySelectorAll('#inicio a');
+  assert.equal(links.length, 2);
+  const [primary, secondary] = links;
+  assert.equal(t(primary), 'Hablemos');
+  assert.equal(t(secondary), 'Ver proyectos →');
+  assert.equal(secondary.getAttribute('href'), '#proyectos');
+  assert.match(secondary.getAttribute('class'), /\bbtn-navy\b/);
+  for (const a of links) assert.match(a.getAttribute('class'), /sm:min-w-\[190px\]/);
+  assert.equal(page().querySelectorAll('.btn-outline').length, 0);
 });
 
 test('css: scroll-padding para el header fijo y smooth solo sin reduced-motion', async () => {

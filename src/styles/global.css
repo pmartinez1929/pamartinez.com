@@ -62,14 +62,12 @@
   .btn-cream:hover {
     background-color: var(--color-aqua);
   }
-  .btn-outline {
-    border: 2px solid var(--color-navy);
-    padding: 6px 29px;
-    color: var(--color-navy);
-  }
-  .btn-outline:hover {
+  .btn-navy {
     background-color: var(--color-navy);
     color: #fff;
+  }
+  .btn-navy:hover {
+    background-color: var(--color-blue);
   }
 }
 

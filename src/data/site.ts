@@ -20,7 +20,7 @@ export const site = {
     titleLine1: 'Diseñador de producto',
     titleLine2: 'desarrollador',
     cta: 'Hablemos',
-    secondaryCta: 'Ver proyectos',
+    secondaryCta: 'Ver proyectos →',
   },
   company: { name: 'Blubear.io', url: 'https://blubear.io/' },
   nav: [

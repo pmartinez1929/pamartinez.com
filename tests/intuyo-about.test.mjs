@@ -29,4 +29,8 @@ test('quien soy: foto, bio con Blubear y texto', () => {
 
 test('quien soy: sin botones de redes', () => {
   assert.equal(page().querySelectorAll('#sobre-mi [data-social]').length, 0);
+  const hrefs = [...page().querySelectorAll('#sobre-mi a')].map((a) => a.getAttribute('href') ?? '');
+  for (const host of ['linkedin.com', 'github.com', 'behance.net']) {
+    assert.ok(!hrefs.some((h) => h.includes(host)), `#sobre-mi no debe enlazar a ${host}`);
+  }
 });

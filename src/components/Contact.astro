@@ -31,8 +31,7 @@ const [primary, ...secondary] = items;
     <a
       class="btn btn-red mb-6 flex items-center justify-center gap-3"
       href={primary.href}
-      target="_blank"
-      rel="noopener noreferrer"
+      {...(primary.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
     >
       <img src={primary.icon} alt="" width="19" height={primary.h} />
       {primary.label}

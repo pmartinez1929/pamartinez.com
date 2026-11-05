@@ -32,8 +32,15 @@ test('footer muestra redes, Intuyo, correo, nombre y año actual', () => {
     ['Intuyo', 'https://www.instagram.com/intuyo.dev/'],
   ];
   const social = footer.querySelectorAll('nav a');
-  assert.deepEqual(social.map((a) => [t(a), a.getAttribute('href')]), expected);
-  for (const a of social) assert.ok(isSafeExternal(a));
+  assert.deepEqual(social.map((a) => [a.getAttribute('aria-label'), a.getAttribute('href')]), expected);
+  for (const a of social) {
+    assert.ok(isSafeExternal(a));
+    assert.equal(t(a), '', 'solo ícono, sin texto visible');
+    assert.equal(a.querySelector('svg')?.getAttribute('aria-hidden'), 'true');
+  }
+  const iso = footer.querySelector('a[href="#inicio"]');
+  assert.equal(iso?.getAttribute('aria-label'), 'Volver al inicio');
+  assert.ok(iso.querySelector('img'));
   const mail = footer.querySelector('a[href="mailto:hola@pamartinez.com"]');
   assert.ok(mail);
   assert.equal(t(mail), 'hola@pamartinez.com');

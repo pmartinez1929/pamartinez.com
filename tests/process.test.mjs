@@ -5,6 +5,7 @@ import { page, t, sectionHeading } from './helpers.mjs';
 test('cómo trabajo: título, intro y 4 pasos en lista ordenada', () => {
   const s = page().querySelector('#proceso');
   assert.ok(s);
+  assert.match(s.getAttribute('class'), /\bbg-mist\b/, 'banda gris de borde a borde');
   assert.deepEqual(sectionHeading(s), { eyebrow: 'Proceso', title: 'Cómo trabajo' });
   assert.match(t(s), /Un proceso simple en 4 pasos, de la idea al producto publicado\./);
   const items = s.querySelectorAll('ol > li');

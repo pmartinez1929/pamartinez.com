@@ -1,11 +1,12 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { page, t } from './helpers.mjs';
+import { page, t, sectionHeading } from './helpers.mjs';
 
 test('cómo trabajo: h2 y 4 pasos en lista ordenada', () => {
   const s = page().querySelector('#proceso');
   assert.ok(s);
-  assert.equal(t(s.querySelector('h2')), 'Cómo trabajo');
+  assert.deepEqual(sectionHeading(s), { eyebrow: 'Proceso', title: 'Cómo trabajo' });
+  assert.match(t(s), /Un proceso simple en 4 pasos, de la idea al producto publicado\./);
   const items = s.querySelectorAll('ol > li');
   assert.equal(items.length, 4);
   assert.deepEqual(

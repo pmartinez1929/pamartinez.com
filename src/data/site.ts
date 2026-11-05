@@ -42,7 +42,7 @@ export const site = {
     text: 'Soy curioso y autodidacta. Me gusta entender qué necesita realmente una idea y cómo convertirla en un producto digital que la gente use.',
   },
   projectsLabel: 'Proyectos',
-  processLabel: 'Cómo trabajo',
+  processIntro: 'Un proceso simple en 4 pasos, de la idea al producto publicado.',
   // Títulos de sección: etiqueta (eyebrow) + h2
   sections: {
     clients: { eyebrow: 'Clientes', title: 'He trabajado con' },

@@ -36,7 +36,8 @@ export const site = {
   },
   projectsLabel: 'Proyectos',
   processLabel: 'Cómo trabajo',
-  clientsLabel: 'He trabajado',
+  clientsLabel: 'He trabajado con',
+  servicesLabel: 'Qué hago',
   socials: [
     { label: 'LinkedIn', url: 'https://www.linkedin.com/in/pmartinezesp/' },
     { label: 'GitHub', url: 'https://github.com/pmartinez1929' },

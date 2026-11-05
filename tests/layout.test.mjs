@@ -13,3 +13,8 @@ test('index carga la hoja de estilos compilada', () => {
   const doc = page();
   assert.ok(doc.querySelector('link[rel="stylesheet"]') || doc.querySelector('style'));
 });
+
+test('las secciones aparecen en el orden nuevo', () => {
+  const ids = page().querySelectorAll('main section[id]').map((s) => s.getAttribute('id'));
+  assert.deepEqual(ids, ['inicio', 'clientes', 'servicios', 'proceso', 'proyectos', 'intuyo', 'sobre-mi', 'contacto']);
+});

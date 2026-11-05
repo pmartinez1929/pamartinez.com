@@ -5,12 +5,6 @@ import { site } from '../data/site';
 ---
 
 <div class="relative overflow-x-clip">
-  <img
-    src="/svg/circles-red.svg"
-    alt=""
-    aria-hidden="true"
-    class="pointer-events-none absolute top-[834px] -right-[60px] hidden w-[252px] md:block"
-  />
   <section id="sobre-mi" class="relative mx-auto flex max-w-[860px] flex-col px-6 py-[50px] md:px-0">
     <img
       src="/svg/circles-red.svg"
@@ -30,7 +24,6 @@ import { site } from '../data/site';
           <p class="mb-6 max-w-[680px]">{site.about.text}</p>
         </div>
       </div>
-      <slot />
     </div>
   </section>
 </div>

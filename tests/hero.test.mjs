@@ -38,7 +38,7 @@ test('footer muestra redes, Intuyo, correo, nombre y año actual', () => {
     assert.equal(t(a), '', 'solo ícono, sin texto visible');
     assert.equal(a.querySelector('svg')?.getAttribute('aria-hidden'), 'true');
   }
-  const iso = footer.querySelector('a[href="#inicio"]');
+  const iso = footer.querySelector('a[href="/#inicio"]');
   assert.equal(iso?.getAttribute('aria-label'), 'Volver al inicio');
   assert.ok(iso.querySelector('img'));
   const mail = footer.querySelector('a[href="mailto:hola@pamartinez.com"]');

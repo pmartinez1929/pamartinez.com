@@ -12,7 +12,7 @@ import { site } from '../data/site';
     <nav aria-label="Secciones" class="hidden gap-8 font-medium text-navy md:flex">
       {site.nav.map((item) => <a class="hover:text-red" href={item.href}>{item.label}</a>)}
     </nav>
-    <a class="btn btn-red" href={site.contact.whatsapp} target="_blank" rel="noopener noreferrer">
+    <a class="btn btn-red" href={site.contact.whatsapp} target="_blank" rel="noopener noreferrer" data-track="whatsapp" data-track-label="header">
       {site.hero.cta}
     </a>
   </div>

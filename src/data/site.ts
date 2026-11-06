@@ -11,6 +11,8 @@ export const site = {
   description:
     'Combino diseño UX, desarrollo y herramientas de IA para llevar tu idea a una web o app real, más rápido y sin perder calidad.',
   twitter: '@pmartinez1929',
+  // ID público del contenedor de Google Tag Manager (GA4, Clarity y demás se configuran dentro de GTM)
+  gtmId: 'GTM-5NMPVG2G',
   contact: {
     whatsapp: `https://api.whatsapp.com/send?phone=593995027973&text=${encodeURIComponent(whatsappMessage)}`,
     calendly: 'https://calendly.com/pmartinez1929/reunion',

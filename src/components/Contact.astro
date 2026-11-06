@@ -2,9 +2,9 @@
 import { site } from '../data/site';
 
 const items = [
-  { label: site.cta.whatsapp, href: site.contact.whatsapp, icon: '/svg/icon-whatsapp.svg', h: 19, external: true },
-  { label: site.cta.calendly, href: site.contact.calendly, icon: '/svg/icon-calendar.svg', h: 19, external: true },
-  { label: site.cta.email, href: `mailto:${site.contact.email}`, icon: '/svg/icon-email.svg', h: 15, external: false },
+  { label: site.cta.whatsapp, href: site.contact.whatsapp, track: 'whatsapp', icon: '/svg/icon-whatsapp.svg', h: 19, external: true },
+  { label: site.cta.calendly, href: site.contact.calendly, track: 'calendly', icon: '/svg/icon-calendar.svg', h: 19, external: true },
+  { label: site.cta.email, href: `mailto:${site.contact.email}`, track: 'email', icon: '/svg/icon-email.svg', h: 15, external: false },
 ];
 const [primary, ...secondary] = items;
 ---
@@ -31,6 +31,8 @@ const [primary, ...secondary] = items;
     <a
       class="btn btn-red mb-6 flex items-center justify-center gap-3"
       href={primary.href}
+      data-track={primary.track}
+      data-track-label="contacto"
       {...(primary.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
     >
       <img src={primary.icon} alt="" width="19" height={primary.h} />
@@ -41,6 +43,8 @@ const [primary, ...secondary] = items;
         <a
           class="group mb-5 flex font-medium"
           href={item.href}
+          data-track={item.track}
+          data-track-label="contacto"
           {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
         >
           <span class="mr-4 flex size-11 shrink-0 items-center justify-center rounded-2xl bg-navy">

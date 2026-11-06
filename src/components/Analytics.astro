@@ -1,0 +1,46 @@
+---
+import { site } from '../data/site';
+---
+
+{
+  import.meta.env.PROD && (
+    <>
+      {/* Consent Mode v2: todo denegado hasta que el visitante acepte; debe correr antes de GTM */}
+      <script is:inline>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag('consent', 'default', {
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+          analytics_storage: 'denied',
+          wait_for_update: 500,
+        });
+        try {
+          if (localStorage.getItem('consent') === 'granted') {
+            gtag('consent', 'update', {
+              ad_storage: 'granted',
+              ad_user_data: 'granted',
+              ad_personalization: 'granted',
+              analytics_storage: 'granted',
+            });
+          }
+        } catch (e) {}
+        dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+      </script>
+      <script is:inline async src={`https://www.googletagmanager.com/gtm.js?id=${site.gtmId}`} />
+    </>
+  )
+}
+
+<script>
+  // Cada clic en un enlace con data-track llega a GTM como evento click_<tipo> (click_whatsapp, click_proyecto…)
+  const w = window as Window & { dataLayer?: object[] };
+  document.addEventListener('click', (e) => {
+    const a = (e.target as Element).closest<HTMLAnchorElement>('a[data-track]');
+    if (!a) return;
+    w.dataLayer?.push({ event: `click_${a.dataset.track}`, link_label: a.dataset.trackLabel, link_url: a.href });
+  });
+</script>

@@ -33,6 +33,8 @@ const label = ctaLabel[project.cta];
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`${label} de ${project.name}`}
+      data-track="proyecto"
+      data-track-label={project.name}
       class="mt-auto pt-4 font-bold text-red after:absolute after:inset-0"
     >
       {label} →

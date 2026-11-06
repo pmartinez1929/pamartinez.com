@@ -29,12 +29,15 @@ const sized = (svg: string) => svg.replace(/width="16" height="16"/, 'width="24"
               target="_blank"
               rel="noopener noreferrer"
               aria-label={l.label}
+              data-track="social"
+              data-track-label={l.label}
               set:html={sized(l.icon)}
             />
           ))
         }
       </nav>
-      <a href="#inicio" aria-label="Volver al inicio" class="focus-visible:outline-white">
+      {/* Con la ruta para que funcione también desde /privacidad/ y la 404 */}
+      <a href="/#inicio" aria-label="Volver al inicio" class="focus-visible:outline-white">
         {/* El isotipo es un degradado azul que se pierde sobre navy: se muestra en blanco */}
         <Image src={logo} alt="" height={44} class="h-11 w-auto brightness-0 invert" />
       </a>
@@ -42,9 +45,20 @@ const sized = (svg: string) => svg.replace(/width="16" height="16"/, 'width="24"
     <div
       class="mt-6 flex flex-col items-center gap-2 border-t border-white/15 pt-6 text-sm sm:flex-row sm:justify-between"
     >
-      <a class="hover:text-aqua focus-visible:outline-white" href={`mailto:${site.contact.email}`}>
+      <a
+        class="hover:text-aqua focus-visible:outline-white"
+        href={`mailto:${site.contact.email}`}
+        data-track="email"
+        data-track-label="footer"
+      >
         {site.contact.email}
       </a>
+      <div class="flex gap-5">
+        <a class="hover:text-aqua focus-visible:outline-white" href="/privacidad/">Privacidad</a>
+        <button type="button" class="cursor-pointer hover:text-aqua focus-visible:outline-white" data-consent-open>
+          Preferencias de cookies
+        </button>
+      </div>
       <p>{site.name} &nbsp;·&nbsp; © {year}</p>
     </div>
   </div>
